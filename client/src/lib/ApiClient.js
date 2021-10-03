@@ -1,32 +1,33 @@
 import axios from "axios";
+const baseUrl = process.env.REACT_APP_BACKEND_URL || "";
 
 const apiClient = {
   getProducts: function (callback) {
     return axios
-      .get("/api/products")
+      .get(`${baseUrl}/api/products`)
       .then((res) => res.data)
       .then(callback)
       .catch((e) => console.log(e));
   },
   addProduct: function (productObj) {
-    return axios.post("/api/products", productObj);
+    return axios.post(`${baseUrl}/api/products`, productObj);
   },
   getCart: function (callback) {
     return axios
-      .get("/api/cart")
+      .get(`${baseUrl}/api/cart`)
       .then((res) => res.data)
       .then(callback)
       .catch((e) => console.log(e));
   },
   addProductToCart: function (product, callback) {
     return axios
-      .post(`/api/cart`, product)
+      .post(`${baseUrl}/api/cart`, product)
       .then((res) => res.data)
       .then(callback);
   },
   editProduct: function (product, callback) {
     return axios
-      .put(`/api/products/${product._id}`, product)
+      .put(`${baseUrl}/api/products/${product._id}`, product)
       .then((res) => res.data)
       .then(callback)
       .catch((e) => console.log(e));
@@ -40,7 +41,7 @@ const apiClient = {
   },
   deleteProduct: function (id, callback) {
     return axios
-      .delete(`/api/products/${id}`)
+      .delete(`${baseUrl}/api/products/${id}`)
       .then((res) => res.data)
       .then(callback)
       .catch((e) => console.log(e));
